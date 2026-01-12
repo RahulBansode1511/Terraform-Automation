@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -9,10 +8,11 @@ pipeline {
             description: 'Select the action to perform'
         )
     }
+
     stages {
         stage('Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ygminds73/Terraform-Automation.git']])
+                git 'https://github.com/RahulBansode1511/Terraform-Automation.git'
             }
         }
     
@@ -21,8 +21,8 @@ pipeline {
                 sh ("terraform init -reconfigure") 
             }
         }
-
-        stage ("Action") {
+        
+        stage (" Action") {
             steps {
                 script {
                     switch (params.ACTION) {
